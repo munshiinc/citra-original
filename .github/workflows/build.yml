@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: recursive
       - name: Pack
-        run: ./.ci/source.sh
+        run: chmod u+r+x ./.ci/source.sh
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
@@ -48,9 +48,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.target }}-
       - name: Build
-        run: ./.ci/linux.sh
+        run: chmod u+r+x ./.ci/linux.sh
       - name: Pack
-        run: ./.ci/pack.sh
+        run: chmod u+r+x ./.ci/pack.sh
         if: ${{ matrix.target == 'appimage' }}
       - name: Upload
         uses: actions/upload-artifact@v4
@@ -83,7 +83,7 @@ jobs:
       - name: Install tools
         run: brew install ccache ninja
       - name: Build
-        run: ./.ci/macos.sh
+        run: chmod u+r+x ./.ci/macos.sh
       - name: Prepare outputs for caching
         run: mv build/bundle $OS-$TARGET
       - name: Cache outputs for universal build
@@ -112,11 +112,11 @@ jobs:
           key: ${{ runner.os }}-arm64-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           fail-on-cache-miss: true
       - name: Create universal app
-        run: ./.ci/macos-universal.sh
+        run: chmod u+r+x ./.ci/macos-universal.sh
         env:
           ARTIFACTS: ${{ env.OS }}-x86_64 ${{ env.OS }}-arm64
       - name: Pack
-        run: ./.ci/pack.sh
+        run: chmod u+r+x ./.ci/pack.sh
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
@@ -166,9 +166,9 @@ jobs:
       - name: Disable line ending translation
         run: git config --global core.autocrlf input
       - name: Build
-        run: ./.ci/windows.sh
+        run: chmod u+r+x ./.ci/windows.sh
       - name: Pack
-        run: ./.ci/pack.sh
+        run: chmod u+r+x ./.ci/pack.sh
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
@@ -214,7 +214,7 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASS }}
       - name: Pack
-        run: ../../../.ci/pack.sh
+        run: chmod u+r+x ../../../.ci/pack.sh
         working-directory: src/android/app
         env:
           UNPACKED: 1
@@ -246,7 +246,7 @@ jobs:
       - name: Install tools
         run: brew install ccache ninja
       - name: Build
-        run: ./.ci/ios.sh
+        run: chmod u+r+x ./.ci/ios.sh
   release:
     runs-on: ubuntu-latest
     needs: [windows, linux, macos-universal, android, source]
