@@ -82,6 +82,8 @@ jobs:
             ${{ runner.os }}-${{ matrix.target }}-
       - name: Install ninja
         run: brew install ninja
+      - name: Install ccache
+        run: brew install ccache
       - name: Build
         run: chmod u+r+x ./.ci/macos.sh
       - name: Prepare outputs for caching
