@@ -81,7 +81,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.target }}-
       - name: Install tools
-        run: brew install ccache ninja
+        run: brew install ccache
+        run: brew install ninja
       - name: Build
         run: chmod u+r+x ./.ci/macos.sh
       - name: Prepare outputs for caching
@@ -208,7 +209,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install ccache apksigner -y
       - name: Build
-        run: JAVA_HOME=$JAVA_HOME_17_X64 ./.ci/android.sh
+        run: JAVA_HOME=$JAVA_HOME_17_X64 chmod u+r+x ./.ci/android.sh
         env:
           ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
