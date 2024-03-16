@@ -81,8 +81,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.target }}-
       - name: Install tools
-        run: brew install ccache
-        run: brew install ninja
+        run: brew install ccache ninja
       - name: Build
         run: chmod u+r+x ./.ci/macos.sh
       - name: Prepare outputs for caching
