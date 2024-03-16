@@ -80,8 +80,6 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.target }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.target }}-
-      - name: Install ccache
-        run: brew install ccache
       - name: Install ninja
         run: brew install ninja
       - name: Build
